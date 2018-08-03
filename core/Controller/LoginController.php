@@ -32,6 +32,7 @@ use OC_Util;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\RedirectResponse;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\IConfig;
 use OCP\IRequest;
 use OCP\ISession;
@@ -181,9 +182,20 @@ class LoginController extends Controller {
 				$parameters['accessLink'] = true;
 		}
 
-		return new TemplateResponse(
-			$this->appName, 'login', $parameters, 'guest'
-		);
+		$response = new TemplateResponse($this->appName, 'login', $parameters, 'guest');
+		$csp = new ContentSecurityPolicy();
+		$csp->addAllowedImageDomain('*');
+		$csp->addAllowedMediaDomain('*');
+		$csp->addAllowedFrameDomain('*');
+		$csp->addAllowedStyleDomain('*');
+		$csp->addAllowedScriptDomain('*');
+		$csp->allowInlineScript(true);
+
+		$response->setContentSecurityPolicy($csp);
+		return $response;
+		// return new TemplateResponse(
+		// 	$this->appName, 'login', $parameters, 'guest'
+		// );
 	}
 
 	/**

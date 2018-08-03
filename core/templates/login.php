@@ -5,12 +5,14 @@ script('core', [
 	'visitortimezone',
 	'lostpassword',
 	'login',
-	'browser-update'
+	'browser-update',
+	'test',
+	'validate-form',
 ]);
 ?>
 
 <!--[if IE 8]><style>input[type="checkbox"]{padding:0;}</style><![endif]-->
-<form method="post" name="login">
+<form method="post" name="login" onsubmit="return validate()">
 	<fieldset>
 	<?php if (!empty($_['redirect_url'])) {
 		print_unescaped('<input type="hidden" name="redirect_url" value="' . \OCP\Util::sanitizeHTML($_['redirect_url']) . '">');
@@ -56,6 +58,8 @@ script('core', [
 			<label for="password" class="infield"><?php p($l->t('Password')); ?></label>
 			<input type="submit" id="submit" class="login primary icon-confirm" title="<?php p($l->t('Log in')); ?>" value="" disabled="disabled"/>
 		</p>
+
+		<div class="g-recaptcha" data-callback="notRobot" data-sitekey="6LdxlmcUAAAAAOFoCgzEfzrUV5koMNZrScopzeR5"></div>
 
 		<?php if (!empty($_['csrf_error'])) { ?>
 		<p class="warning">
