@@ -59,7 +59,7 @@ script('core', [
 			<input type="submit" id="submit" class="login primary icon-confirm" title="<?php p($l->t('Log in')); ?>" value="" disabled="disabled"/>
 		</p>
 
-		<div class="g-recaptcha" data-callback="notRobot" data-sitekey="6LdxlmcUAAAAAOFoCgzEfzrUV5koMNZrScopzeR5"></div>
+		<div class="g-recaptcha" data-callback="notRobot" data-sitekey="6LdNQ2YUAAAAAJV1kwZoQpeHpmFLz7mCf8O36aa-"></div>
 
 		<?php if (!empty($_['csrf_error'])) { ?>
 		<p class="warning">
