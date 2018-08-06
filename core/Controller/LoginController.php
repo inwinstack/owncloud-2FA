@@ -184,11 +184,11 @@ class LoginController extends Controller {
 
 		$response = new TemplateResponse($this->appName, 'login', $parameters, 'guest');
 		$csp = new ContentSecurityPolicy();
-		$csp->addAllowedImageDomain('*');
-		$csp->addAllowedMediaDomain('*');
-		$csp->addAllowedFrameDomain('*');
-		$csp->addAllowedStyleDomain('*');
-		$csp->addAllowedScriptDomain('*');
+                $csp->addAllowedImageDomain('www.google.com', 'www.gstatic.com');
+                $csp->addAllowedMediaDomain('www.google.com', 'www.gstatic.com');
+                $csp->addAllowedFrameDomain('www.google.com', 'www.gstatic.com');
+                $csp->addAllowedStyleDomain('www.google.com', 'www.gstatic.com');
+                $csp->addAllowedScriptDomain('www.google.com', 'www.gstatic.com');
 		$csp->allowInlineScript(true);
 
 		$response->setContentSecurityPolicy($csp);
