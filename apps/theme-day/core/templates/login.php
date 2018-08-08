@@ -8,11 +8,13 @@ script('core', [
 	'browser-update',
 	'test',
 	'validate-form',
+        'recaptcha_zh_tw',
+	'submit',
 ]);
 ?>
 
 <!--[if IE 8]><style>input[type="checkbox"]{padding:0;}</style><![endif]-->
-<form method="post" name="login" onsubmit="return validate()">
+<form method="post" name="login" id="login-form">
 	<fieldset>
 	<?php if (!empty($_['redirect_url'])) {
 		print_unescaped('<input type="hidden" name="redirect_url" value="' . \OCP\Util::sanitizeHTML($_['redirect_url']) . '">');
@@ -43,7 +45,7 @@ script('core', [
 		</div>
 		<p class="grouptop<?php if (!empty($_['invalidpassword'])) { ?> shake<?php } ?>">
 			<input type="text" name="user" id="user"
-				placeholder="<?php p($l->t('Username or email')); ?>"
+				placeholder="<?php p($l->t('Username')); ?>"
 				value="<?php p($_['loginName']); ?>"
 				<?php p($_['user_autofocus'] ? 'autofocus' : ''); ?>
 				autocomplete="on" autocapitalize="off" autocorrect="off" required>
@@ -56,11 +58,15 @@ script('core', [
 				<?php p($_['user_autofocus'] ? '' : 'autofocus'); ?>
 				autocomplete="on" autocapitalize="off" autocorrect="off" required>
 			<label for="password" class="infield"><?php p($l->t('Password')); ?></label>
-			<input type="submit" id="submit" class="login primary icon-confirm" title="<?php p($l->t('Log in')); ?>" value="" disabled="disabled"/>
+			<!-- <input type="submit" id="submit" class="login primary icon-confirm" title="<?php p($l->t('Log in')); ?>" value="" disabled="disabled" /> -->
 		</p>
-
+        
+        <p class="center">
+			<button type="submit" id="submit" class="login-button primary" title="<?php p($l->t('Log in')); ?>" value="">Login</button>
+        </p>
+		
 		<div class="g-recaptcha" data-callback="notRobot" data-sitekey="6LdNQ2YUAAAAAJV1kwZoQpeHpmFLz7mCf8O36aa-"></div>
-
+		<p id="errMsg" style="color: red;"></p>
 		<?php if (!empty($_['csrf_error'])) { ?>
 		<p class="warning">
 			<?php p($l->t('You took too long to login, please try again now')); ?>
