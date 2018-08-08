@@ -65,7 +65,7 @@ script('core', [
 			<button type="submit" id="submit" class="login-button primary" title="<?php p($l->t('Log in')); ?>" value="">Login</button>
         </p>
 		
-		<div class="g-recaptcha" data-callback="notRobot" data-sitekey="6LdNQ2YUAAAAAJV1kwZoQpeHpmFLz7mCf8O36aa-"></div>
+		<div class="g-recaptcha" data-callback="notRobot" data-sitekey="6LfCyWUUAAAAAAnnmAmeWK4PkEyd3nFMHY_USbW0"></div>
 		<p id="errMsg" style="color: red;"></p>
 		<?php if (!empty($_['csrf_error'])) { ?>
 		<p class="warning">
